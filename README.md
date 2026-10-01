@@ -181,3 +181,6 @@ Windows use `waitress` instead: `pip install waitress` then
 - Add unit tests using `create_app("testing")` + pytest.
 - Swap SQLite for Postgres by changing `DATABASE_URL` in `.env` only.
 - Add an audit log table recording every admin/super_admin action.
+
+## Project Status
+ACC Enrollment System initial setup.
