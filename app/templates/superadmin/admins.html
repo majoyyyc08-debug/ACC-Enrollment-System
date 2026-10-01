@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Manage Admins{% endblock %}
+{% block content %}
+<div class="section-title">
+    <h2>Admin Accounts</h2>
+    <a class="btn" href="{{ url_for('superadmin.create_admin') }}">+ New Admin</a>
+</div>
+<table>
+    <thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Status</th><th>Created</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for a in admins %}
+        <tr>
+            <td>{{ a.full_name }}</td>
+            <td>{{ a.username }}</td>
+            <td>{{ a.email }}</td>
+            <td>
+                {% if a.is_active_account %}
+                    <span class="badge badge-active">Active</span>
+                {% else %}
+                    <span class="badge badge-inactive">Inactive</span>
+                {% endif %}
+            </td>
+            <td>{{ a.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>
+                <form class="inline-form" method="POST" action="{{ url_for('superadmin.toggle_active', user_id=a.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button class="btn small {{ 'danger' if a.is_active_account else 'success' }}" type="submit">
+                        {{ 'Deactivate' if a.is_active_account else 'Activate' }}
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="muted">No admin accounts yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

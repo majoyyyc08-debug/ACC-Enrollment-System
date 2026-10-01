@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ mode }} Course{% endblock %}
+{% block content %}
+<div class="card" style="max-width:520px;">
+    <h2>{{ mode }} Course</h2>
+    <form class="stacked" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <label>{{ form.code.label }}</label>
+            {{ form.code() }}
+            {% for e in form.code.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.title.label }}</label>
+            {{ form.title() }}
+            {% for e in form.title.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.description.label }}</label>
+            {{ form.description() }}
+            {% for e in form.description.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.capacity.label }}</label>
+            {{ form.capacity() }}
+            {% for e in form.capacity.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+            {% if course %}<p class="muted">Currently approved: {{ course.approved_count() }}</p>{% endif %}
+        </div>
+        <button class="btn" type="submit">Save Course</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Enrollments{% endblock %}
+{% block content %}
+<h2>Pending Requests</h2>
+<table>
+    <thead><tr><th>Student</th><th>Course</th><th>Requested</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for e in pending %}
+        <tr>
+            <td>{{ e.student.full_name }} <span class="muted">({{ e.student.username }})</span></td>
+            <td>{{ e.course.code }} - {{ e.course.title }}</td>
+            <td>{{ e.requested_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td><a class="btn small" href="{{ url_for('admin.review_enrollment', enrollment_id=e.id) }}">Review</a></td>
+        </tr>
+    {% else %}
+        <tr><td colspan="4" class="muted">Nothing pending.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2 style="margin-top:28px;">Recently Reviewed</h2>
+<table>
+    <thead><tr><th>Student</th><th>Course</th><th>Status</th><th>Reviewed By</th><th>When</th></tr></thead>
+    <tbody>
+    {% for e in reviewed %}
+        <tr>
+            <td>{{ e.student.full_name }}</td>
+            <td>{{ e.course.code }}</td>
+            <td><span class="badge badge-{{ e.status }}">{{ e.status|title }}</span></td>
+            <td>{{ e.reviewer.full_name if e.reviewer else '-' }}</td>
+            <td>{{ e.reviewed_at.strftime('%Y-%m-%d %H:%M') if e.reviewed_at else '-' }}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="5" class="muted">No history yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

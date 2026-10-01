@@ -1,0 +1,116 @@
+/* ---------- Base ---------- */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --warning: #d97706;
+    --info: #0891b2;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.brand { font-weight: 700; font-size: 1.15rem; }
+.navbar nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.navbar nav a { color: var(--text); text-decoration: none; font-size: 0.92rem; }
+.navbar nav a:hover { color: var(--primary); }
+.user-chip {
+    background: #eef2ff; color: var(--primary-dark);
+    padding: 4px 10px; border-radius: 999px; font-size: 0.8rem;
+}
+
+/* ---------- Layout ---------- */
+.container { max-width: 980px; margin: 28px auto; padding: 0 20px; flex: 1; width: 100%; }
+.footer { text-align: center; padding: 16px; color: var(--text-muted); }
+
+/* ---------- Cards ---------- */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+.card.centered { text-align: center; max-width: 420px; margin: 60px auto; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+.stat-box {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px; text-align: center;
+}
+.stat-box .num { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+.stat-box .label { color: var(--text-muted); font-size: 0.85rem; }
+
+/* ---------- Forms ---------- */
+form.stacked { display: flex; flex-direction: column; gap: 14px; max-width: 480px; }
+label { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; display: block; }
+input[type=text], input[type=email], input[type=password], input[type=number],
+select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 0.95rem;
+}
+textarea { min-height: 90px; resize: vertical; }
+.field-errors { color: var(--danger); font-size: 0.8rem; margin-top: 4px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-block; background: var(--primary); color: #fff;
+    padding: 9px 16px; border: none; border-radius: 8px; font-size: 0.9rem;
+    text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--primary-dark); }
+.btn.danger { background: var(--danger); }
+.btn.success { background: var(--success); }
+.btn.small { padding: 5px 10px; font-size: 0.8rem; }
+.btn.outline { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.inline-form { display: inline; }
+
+/* ---------- Tables ---------- */
+table { width: 100%; border-collapse: collapse; background: var(--card-bg); }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+th { background: #f8fafc; color: var(--text-muted); font-weight: 600; }
+
+/* ---------- Badges ---------- */
+.badge { padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.badge-pending { background: #fef3c7; color: var(--warning); }
+.badge-approved { background: #dcfce7; color: var(--success); }
+.badge-rejected { background: #fee2e2; color: var(--danger); }
+.badge-withdrawn { background: #e2e8f0; color: var(--text-muted); }
+.badge-active { background: #dcfce7; color: var(--success); }
+.badge-inactive { background: #fee2e2; color: var(--danger); }
+
+/* ---------- Flash messages ---------- */
+.flash-stack { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
+.flash { padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; }
+.flash-success { background: #dcfce7; color: #14532d; }
+.flash-danger { background: #fee2e2; color: #7f1d1d; }
+.flash-warning { background: #fef3c7; color: #78350f; }
+.flash-info { background: #e0f2fe; color: #0c4a6e; }
+
+.section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.muted { color: var(--text-muted); font-size: 0.85rem; }

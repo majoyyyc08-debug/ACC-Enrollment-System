@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Browse Courses{% endblock %}
+{% block content %}
+<h2>Available Courses</h2>
+<table>
+    <thead><tr><th>Code</th><th>Title</th><th>Description</th><th>Seats</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for c in courses %}
+        <tr>
+            <td>{{ c.code }}</td>
+            <td>{{ c.title }}</td>
+            <td class="muted">{{ c.description or '-' }}</td>
+            <td>{{ c.seats_remaining() }} / {{ c.capacity }}</td>
+            <td>
+                {% if c.id in my_active_course_ids %}
+                    <span class="badge badge-pending">Requested</span>
+                {% elif c.is_full() %}
+                    <span class="badge badge-inactive">Full</span>
+                {% else %}
+                    <form class="inline-form" method="POST" action="{{ url_for('student.enroll', course_id=c.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button class="btn small" type="submit">Enroll</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="5" class="muted">No courses available right now.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

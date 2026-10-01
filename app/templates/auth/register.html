@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="card centered">
+    <h2>Student Registration</h2>
+    <form class="stacked" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <label>{{ form.full_name.label }}</label>
+            {{ form.full_name() }}
+            {% for e in form.full_name.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.username.label }}</label>
+            {{ form.username() }}
+            {% for e in form.username.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.email.label }}</label>
+            {{ form.email() }}
+            {% for e in form.email.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.password.label }}</label>
+            {{ form.password() }}
+            {% for e in form.password.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.confirm_password.label }}</label>
+            {{ form.confirm_password() }}
+            {% for e in form.confirm_password.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <button class="btn" type="submit">Create Account</button>
+    </form>
+    <p class="muted">Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+</div>
+{% endblock %}

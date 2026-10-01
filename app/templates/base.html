@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Enrollment System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="brand">🎓 Enrollment System</div>
+        <nav>
+            {% if current_user.is_authenticated %}
+                {% if current_user.is_super_admin() %}
+                    <a href="{{ url_for('superadmin.dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('superadmin.list_admins') }}">Admins</a>
+                {% elif current_user.is_admin() %}
+                    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('admin.list_courses') }}">Courses</a>
+                    <a href="{{ url_for('admin.list_enrollments') }}">Enrollments</a>
+                    <a href="{{ url_for('admin.list_students') }}">Students</a>
+                {% elif current_user.is_student() %}
+                    <a href="{{ url_for('student.dashboard') }}">My Enrollments</a>
+                    <a href="{{ url_for('student.browse_courses') }}">Browse Courses</a>
+                {% endif %}
+                <span class="user-chip">{{ current_user.full_name }} &middot; {{ current_user.role.replace('_',' ')|title }}</span>
+                <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}">Login</a>
+                <a href="{{ url_for('auth.register') }}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-stack">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <small>Enrollment System &mdash; Flask / SQLite demo project</small>
+    </footer>
+</body>
+</html>

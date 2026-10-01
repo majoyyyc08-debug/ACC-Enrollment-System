@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Review Enrollment{% endblock %}
+{% block content %}
+<div class="card" style="max-width:520px;">
+    <h2>Review Request</h2>
+    <p><strong>Student:</strong> {{ enrollment.student.full_name }} ({{ enrollment.student.username }})</p>
+    <p><strong>Course:</strong> {{ enrollment.course.code }} - {{ enrollment.course.title }}</p>
+    <p><strong>Seats remaining:</strong> {{ enrollment.course.seats_remaining() }} / {{ enrollment.course.capacity }}</p>
+
+    <form class="stacked" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <label>{{ form.decision.label }}</label>
+            {{ form.decision() }}
+        </div>
+        <div>
+            <label>{{ form.remarks.label }}</label>
+            {{ form.remarks() }}
+            {% for e in form.remarks.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <button class="btn" type="submit">Submit Decision</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Super Admin Dashboard{% endblock %}
+{% block content %}
+<h2>System Overview</h2>
+<div class="stat-grid">
+    <div class="stat-box"><div class="num">{{ stats.admin_count }}</div><div class="label">Admins</div></div>
+    <div class="stat-box"><div class="num">{{ stats.student_count }}</div><div class="label">Students</div></div>
+    <div class="stat-box"><div class="num">{{ stats.course_count }}</div><div class="label">Courses</div></div>
+    <div class="stat-box"><div class="num">{{ stats.pending_enrollments }}</div><div class="label">Pending Enrollments</div></div>
+</div>
+<div class="card" style="margin-top:20px;">
+    <p>As Super Admin you can create and manage <strong>Admin</strong> accounts.</p>
+    <a class="btn" href="{{ url_for('superadmin.list_admins') }}">Manage Admins</a>
+</div>
+{% endblock %}

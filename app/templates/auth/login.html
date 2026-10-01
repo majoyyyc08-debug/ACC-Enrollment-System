@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="card centered">
+    <h2>Login</h2>
+    <form class="stacked" method="POST">
+        {{ form.hidden_tag() }} {# renders the CSRF token #}
+        <div>
+            <label>{{ form.username.label }}</label>
+            {{ form.username(class_="input") }}
+            {% for e in form.username.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <div>
+            <label>{{ form.password.label }}</label>
+            {{ form.password() }}
+            {% for e in form.password.errors %}<div class="field-errors">{{ e }}</div>{% endfor %}
+        </div>
+        <button class="btn" type="submit">Log In</button>
+    </form>
+    <p class="muted">No account? <a href="{{ url_for('auth.register') }}">Register as a student</a></p>
+</div>
+{% endblock %}
