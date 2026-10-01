@@ -184,3 +184,6 @@ Windows use `waitress` instead: `pip install waitress` then
 
 ## Project Status
 ACC Enrollment System initial setup.
+
+## Main Branch
+Stable project branch.
